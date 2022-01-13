@@ -34,8 +34,7 @@ public class PhonebookController extends HttpServlet {
 			
 			System.out.println(personList); //주소 넣으면 프린트는 투스트링 찍어줌
 			
-			//html과 list를 섞어서 표현해야한다.
-			//servlet 으로는 표현이 복잡하다 --> jsp를 이용한다.(jsp를 생성해서 작성)
+			//servlet 으로는 html 표현이 복잡하다 --> jsp를 이용한다.(jsp를 생성해서 작성)
 			//1)데이터 넣어주기
 			request.setAttribute("pList",personList); //괄호("별명key값", 데이터)
 		

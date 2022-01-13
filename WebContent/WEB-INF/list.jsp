@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="java.util.List" %>
-<%@ page import="com.javaex.vo.PersonVo" %>
-
-<%
-	//컨트롤러가 보내준 데이터 받아오기(강제 형변환을 해줘야함 원래는 오브젝트에있는것을 받아오기때문에 )
-	//ex)int면 Integer로 받아옴-> 기본자료형
-	//request의 setAttribute를 받아오는 것 
-	List<PersonVo> personList = (List<PersonVo>)request.getAttribute("pList");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -26,34 +17,29 @@
 	
 	<p>입력한 정보 내역입니다.</p>
 	
-	<% 
-	for(int i =0; i<personList.size(); i++){
-	%>
-	<form action="/phonebook2/pbc" method="get">
+	<c:forEach items="${requestScope.pList}" var="pList">
+		<form action="/phonebook2/pbc" method="get">
 		<table border="1">
 			<tr>
 				<td>이름(name)</td>
-				<td><%=personList.get(i).getName() %></td>
+				<td>${pList.name}</td>
 			</tr>
 			<tr>
 				<td>핸드폰(hp)</td>
-				<td><%=personList.get(i).getHp() %></td>
+				<td>${pList.hp}</td>
 			</tr>
 			<tr>
 				<td>회사(company)</td>
-				<td><%=personList.get(i).getCompany() %></td>
+				<td>${pList.company}</td>
 			</tr>
 			<tr>
-				<td><a href="/phonebook2/pbc?action=updateForm&id=<%= personList.get(i).getPersonId() %>">수정</a></td>
-				<td><a href="/phonebook2/pbc?action=delete&id=<%= personList.get(i).getPersonId() %>">삭제</a></td>
+				<td><a href="/phonebook2/pbc?action=updateForm&id=${pList.personId}">수정</a></td>
+				<td><a href="/phonebook2/pbc?action=delete&id=${pList.personId}">삭제</a></td>
 			</tr>
 		</table>
 		<br>
-	</form>
-	<% 
-	} 
-	%>
-	
+		</form>
+	</c:forEach>
 	
 	
 </body>
